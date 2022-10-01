@@ -7,6 +7,7 @@ import {useParams} from "react-router-dom";
 
 const Images = () => {
     const [catsData, setCatsData] = useState([]);
+    const [page, setPage] = useState(1);
 
     const data = useSelector((state) => state.cats.data)
 
@@ -14,12 +15,11 @@ const Images = () => {
 
     const {id} = useParams();
 
-    let page = 1;
-
     const loadMore = () => {
+        setPage(page + 1);
         const value = {
             id,
-            page: ++page
+            page: page
         }
         dispatch(catsAsync(value))
     }
